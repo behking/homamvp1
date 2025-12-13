@@ -1,0 +1,19 @@
+{
+  "frame": {
+    "name": "Homa",
+    "version": "1",
+    "iconUrl": "https://homa-xi.vercel.app/icon.png",
+    "homeUrl": "https://homa-xi.vercel.app/game.html/",
+    "splashImageUrl": "https://homa-xi.vercel.app/splash.png",
+    "splashBackgroundColor": "#1a1a1a",
+    "subtitle": "Homa",
+    "description": "game for charity",
+    "primaryCategory": "games",
+    "tags": []
+  },
+  "accountAssociation": {
+    "header": "eyJmaWQiOjE0OTc0MjEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHg0OTYzOGQzYTRFMzQyOWQ2NDNFODA5QTkyYzk5RUJEOTQzNGYxNURDIn0",
+    "payload": "eyJkb21haW4iOiJob21hLXhpLnZlcmNlbC5hcHAifQ",
+    "signature": "SM8K5U0PmK5GLbXMSqBKbol9Dqx60/7mi0YPSr5HEcB24OP+1Q14j5odP2rg+GN5wis2VpWfepAkKURMKObhbBw="
+  }
+}
