@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
-import { useAccount, useConnect, useConnectors, useReadContract, useReadContracts, useSwitchChain, useChainId } from 'wagmi';
+import { useAccount, useConnect, useConnectors, useReadContract, useReadContracts, useSwitchChain } from 'wagmi';
 import { useHomaCore } from '../../hooks/useHomaCore';
 import { useEthPrice } from '../../hooks/useEthPrice';
 import { RUNNER_ADAPTER_ADDRESS, RUNNER_ADAPTER_ABI, HOMA_CORE_ADDRESS, HOMA_CORE_ABI } from '../../contracts/abi';
@@ -153,8 +153,7 @@ export function HomaRunner({ onBack }: HomaRunnerProps) {
   const [comboText, setComboText] = useState('');
   const [powerupStatus, setPowerupStatus] = useState({ shield: false, fire: false, star: false });
 
-  const { address, isConnected } = useAccount();
-  const chainId = useChainId();
+  const { address, isConnected, chainId } = useAccount();
   const { switchChain } = useSwitchChain();
   const { connect } = useConnect();
   const connectors = useConnectors();
@@ -1413,7 +1412,7 @@ export function HomaRunner({ onBack }: HomaRunnerProps) {
                     <div className="snake-stat-lbl">Tickets</div>
                   </div>
                   <div className="snake-stat-item">
-                    <div className="snake-stat-val">{userCents % 100}¢</div>
+                    <div className="snake-stat-val">{userCents}¢</div>
                     <div className="snake-stat-lbl">Accumulated</div>
                   </div>
                   <div className="snake-stat-item">

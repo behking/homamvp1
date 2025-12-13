@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
-import { useAccount, useReadContracts, useConnect, useConnectors, useSwitchChain, useChainId, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
+import { useAccount, useReadContracts, useConnect, useConnectors, useSwitchChain, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther, encodeAbiParameters } from 'viem';
 import { useHomaCore } from '../../hooks/useHomaCore';
 import { useEthPrice } from '../../hooks/useEthPrice';
@@ -121,8 +121,7 @@ export function NeonTetris({ onBack }: NeonTetrisProps) {
   const lastMoveXRef = useRef(0);
   const freezeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const { address, isConnected } = useAccount();
-  const chainId = useChainId();
+  const { address, isConnected, chainId } = useAccount();
   const { switchChain } = useSwitchChain();
   const { connect } = useConnect();
   const connectors = useConnectors();
@@ -1067,9 +1066,23 @@ export function NeonTetris({ onBack }: NeonTetrisProps) {
                 <p>Buy power-up for ${pendingPowerup.cost.toFixed(2)}?</p>
                 <p className="eth-amt">{usdToEth(pendingPowerup.cost).toFixed(6)} ETH</p>
                 <div className="payment-btns">
-                  <button className="pay-confirm" onClick={confirmPayment} disabled={isPowerupPending || isTxConfirming}>
-                    {isPowerupPending ? 'Signing...' : isTxConfirming ? 'Confirming...' : 'Confirm'}
-                  </button>
+                  {!isCorrectNetwork ? (
+                    <button 
+                      className="pay-confirm" 
+                      style={{ background: '#e0af68', color: '#000' }}
+                      onClick={() => switchChain({ chainId: SONEIUM_MINATO_CHAIN_ID })}
+                    >
+                      ⚠️ Switch to Soneium
+                    </button>
+                  ) : (
+                    <button 
+                      className="pay-confirm" 
+                      onClick={confirmPayment} 
+                      disabled={isPowerupPending || isTxConfirming}
+                    >
+                      {isPowerupPending ? 'Signing...' : isTxConfirming ? 'Confirming...' : 'Confirm'}
+                    </button>
+                  )}
                   <button className="pay-cancel" onClick={cancelPayment} disabled={isPowerupPending || isTxConfirming}>Cancel</button>
                 </div>
               </div>

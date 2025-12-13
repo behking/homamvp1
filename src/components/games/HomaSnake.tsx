@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
-import { useAccount, useReadContracts, useConnect, useConnectors, useSwitchChain, useChainId } from 'wagmi';
+import { useAccount, useReadContracts, useConnect, useConnectors, useSwitchChain } from 'wagmi';
 import { useHomaCore } from '../../hooks/useHomaCore';
 import { useEthPrice } from '../../hooks/useEthPrice';
 import { HOMA_CORE_ADDRESS, HOMA_CORE_ABI, GAME_ADAPTER_ADDRESS } from '../../contracts/abi';
@@ -89,15 +89,13 @@ export function HomaSnake({ onBack }: HomaSnakeProps) {
   const gridSizeRef = useRef(20);
   const viewModeRef = useRef<ViewMode>('dpad');
 
-  const { address, isConnected } = useAccount();
-  const chainId = useChainId();
+  const { address, isConnected, chainId } = useAccount();
+  const isCorrectNetwork = chainId === SONEIUM_MINATO_CHAIN_ID;
   const { switchChain } = useSwitchChain();
   const { connect } = useConnect();
   const connectors = useConnectors();
   const { donate, isPending, isConfirming, userAccumulation, projectCount } = useHomaCore(address);
   const { usdToEth } = useEthPrice();
-  
-  const isCorrectNetwork = chainId === SONEIUM_MINATO_CHAIN_ID;
 
   const handleConnectWallet = useCallback(() => {
     if (connectors.length > 0) {

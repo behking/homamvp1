@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useAccount, useReadContracts, useSwitchChain, useChainId, usePublicClient } from 'wagmi';
+import { useAccount, useReadContracts, useSwitchChain, usePublicClient } from 'wagmi';
 import { formatEther, parseAbiItem } from 'viem';
 import { useHomaCore } from '../hooks/useHomaCore';
 import { useEthPrice } from '../hooks/useEthPrice';
@@ -33,8 +33,7 @@ interface CharityPanelProps {
 type TabType = 'dashboard' | 'projects' | 'lottery' | 'history' | 'leaderboard';
 
 export function CharityPanel({ onBack }: CharityPanelProps) {
-  const { address, isConnected } = useAccount();
-  const chainId = useChainId();
+  const { address, isConnected, chainId } = useAccount();
   const { switchChain } = useSwitchChain();
   const { ethPrice, ethToUsd } = useEthPrice();
   const publicClient = usePublicClient();
