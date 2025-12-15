@@ -157,7 +157,7 @@ export function HomaRunner({ onBack }: HomaRunnerProps) {
   const { switchChain } = useSwitchChain();
   const { connect } = useConnect();
   const connectors = useConnectors();
-  const { lotteryStatus, donate, isPending, isConfirming, isSuccess, userAccumulation, txHash, projectCount } = useHomaCore(address);
+  const { lotteryStatus, donate, isPending, isConfirming, isSuccess, userAccumulation, txHash, projectCount, reset } = useHomaCore(address);
   const { ethToUsd } = useEthPrice();
   
   const isCorrectNetwork = chainId === SONEIUM_MINATO_CHAIN_ID;
@@ -1479,7 +1479,7 @@ export function HomaRunner({ onBack }: HomaRunnerProps) {
                   ) : (
                     <button 
                       className="snake-btn-green" 
-                      onClick={handleRevive}
+                      onClick={() => { reset(); handleRevive(); }}
                       disabled={isPending || isConfirming}
                     >
                       {isPending || isConfirming ? 'Processing...' : 'SAVE SCORE & DONATE'}

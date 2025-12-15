@@ -52,7 +52,8 @@ export function CharityPanel({ onBack }: CharityPanelProps) {
     isConfirming,
     isSuccess,
     txHash,
-    refetchAll
+    refetchAll,
+    reset
   } = useHomaCore(address);
 
   const [activeTab, setActiveTab] = useState<TabType>('dashboard');
@@ -379,7 +380,7 @@ export function CharityPanel({ onBack }: CharityPanelProps) {
               ) : (
                 <button 
                   className="donate-btn"
-                  onClick={() => setShowConfirmModal(true)}
+                  onClick={() => { reset(); setShowConfirmModal(true); }}
                   disabled={!isConnected || isPending || isConfirming || parseFloat(ethAmount) <= 0}
                 >
                   {isPending || isConfirming ? 'Processing...' : 'PAY & DONATE'}

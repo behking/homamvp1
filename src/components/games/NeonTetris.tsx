@@ -125,7 +125,7 @@ export function NeonTetris({ onBack }: NeonTetrisProps) {
   const { switchChain } = useSwitchChain();
   const { connect } = useConnect();
   const connectors = useConnectors();
-  const { donate, isPending, isConfirming, userAccumulation, projectCount } = useHomaCore(address);
+  const { donate, isPending, isConfirming, userAccumulation, projectCount, reset } = useHomaCore(address);
   const { usdToEth } = useEthPrice();
   
   const { writeContractAsync, isPending: isPowerupPending } = useWriteContract();
@@ -1143,7 +1143,7 @@ export function NeonTetris({ onBack }: NeonTetrisProps) {
                     Switch to Soneium
                   </button>
                 ) : (
-                  <button className="btn-green" onClick={handleDonate} disabled={isPending || isConfirming}>
+                  <button className="btn-green" onClick={() => { reset(); handleDonate(); }} disabled={isPending || isConfirming}>
                     {isPending || isConfirming ? 'Processing...' : 'SAVE SCORE & DONATE'}
                   </button>
                 )}

@@ -25,7 +25,7 @@ export interface UserAccumulation {
 }
 
 export function useHomaCore(address?: `0x${string}`) {
-  const { writeContract, data: hash, isPending, error } = useWriteContract();
+  const { writeContract, data: hash, isPending, error, reset } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
 
   const { data: lotteryStatus, refetch: refetchLottery } = useReadContract({
@@ -133,7 +133,8 @@ export function useHomaCore(address?: `0x${string}`) {
     isSuccess,
     error,
     txHash: hash,
-    refetchAll
+    refetchAll,
+    reset
   };
 }
 
