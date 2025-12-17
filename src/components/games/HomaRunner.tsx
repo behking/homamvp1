@@ -1412,7 +1412,7 @@ export function HomaRunner({ onBack }: HomaRunnerProps) {
                     <div className="snake-stat-lbl">Tickets</div>
                   </div>
                   <div className="snake-stat-item">
-                    <div className="snake-stat-val">{userCents}¢</div>
+                    <div className="snake-stat-val">{userCents % 100}¢</div>
                     <div className="snake-stat-lbl">Accumulated</div>
                   </div>
                   <div className="snake-stat-item">
